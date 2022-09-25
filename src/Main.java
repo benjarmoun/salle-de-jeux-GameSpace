@@ -1,10 +1,12 @@
+import java.nio.charset.Charset;
 import java.time.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
         Player[] queue;
+        Partie[] schedule;
 
 
         LocalTime currentTime = LocalTime.now();
@@ -24,7 +26,27 @@ public class Main {
 
         ArrayList<Post> postes= addPost(consoles,ecrants,games);
         afficherPost(postes);
+        getAlphaNumericString(8);
 
+
+    }
+
+    public static Partie createPartie(){
+        Partie partie= new Partie() ;
+
+        return partie ;
+    }
+
+    public static void getAlphaNumericString(int n)
+    {
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+        StringBuilder sb = new StringBuilder(n);
+
+        for (int i = 0; i < n; i++) {
+            int index = (int)(AlphaNumericString.length() * Math.random());
+            sb.append(AlphaNumericString.charAt(index));
+        }
+        System.out.println(sb.toString());
 
     }
 
@@ -109,11 +131,11 @@ public class Main {
     }
     public static void afficherPost(ArrayList<Post> postes){
         for (Post pst:postes){
-            System.out.println("\n\n"+pst.getId()+"- console: "+pst.getConsole().getName()+" ecrant: "+pst.getEcrant().getMake());
+            System.out.println("\n"+pst.getId()+"- console: "+pst.getConsole().getName()+" ecrant: "+pst.getEcrant().getMake());
             System.out.print("Games: ");
             for(int i=0; i< pst.getGames().size(); i++)
             System.out.print(pst.getGames().get(i).getId()+"- " +pst.getGames().get(i).getName()+" ");
+            System.out.print("\n");
         }
     }
-
 }
