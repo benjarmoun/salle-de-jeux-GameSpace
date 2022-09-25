@@ -2,13 +2,15 @@ import java.time.*;
 public class Player {
     private String prenom;
     private String nom;
+    private String player_code;
     private int post_id;
     private LocalTime debutTime;
     private String periode;
 
-    public Player(String prenom, String nom, int post_id, LocalTime debutTime, String periode) {
+    public Player(String prenom, String nom, String player_code, int post_id, LocalTime debutTime, String periode) {
         this.prenom = prenom;
         this.nom = nom;
+        this.player_code = player_code;
         this.post_id = post_id;
         this.debutTime = debutTime;
         this.periode = periode;
@@ -28,6 +30,14 @@ public class Player {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getPlayer_code() {
+        return player_code;
+    }
+
+    public void setPlayer_code(String player_code) {
+        this.player_code = player_code;
     }
 
     public int getPost_id() {
