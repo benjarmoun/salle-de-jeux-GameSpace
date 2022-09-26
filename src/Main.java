@@ -1,22 +1,22 @@
 import java.nio.charset.Charset;
 import java.time.*;
 import java.util.*;
+import java.util.spi.LocaleNameProvider;
 
 public class Main {
 
+    Player[] queue;
+    ArrayList<Partie> schedule ;
     public static void main(String[] args) {
-        Player[] queue;
-        Partie[] schedule;
 
+        Player player1 = new Player("ibrahim","benjarmoun","generated_code",1,LocalTime.parse("10:30:00"),"2h");
 
-        LocalTime currentTime = LocalTime.now();
+        LocalTime currentTime = LocalTime.parse("03:15");
         System.out.println(currentTime);
 
         ArrayList<Ecrant> ecrants = addEcrant();
 //        afficherEcrant(ecrants);
 //        ecrants.get(0).setQuantity(5);
-//        afficherEcrant(ecrants);
-//
         ArrayList<Game> games = addGame();
 //        afficherGame(games);
 //
@@ -25,29 +25,136 @@ public class Main {
 //        afficherConsolesDispo(consoles);
 
         ArrayList<Post> postes= addPost(consoles,ecrants,games);
+//        afficherPost(postes);
+//        generateRandomCode(8);
+//        Partie partie = createPartie();
+
+
+        Partie partie = new Partie();
+        System.out.println("\n\t\tPlease choose a poste ");
         afficherPost(postes);
-        getAlphaNumericString(8);
+        Scanner scanner = new Scanner(System.in);
+        int x = scanner.nextInt();
+        switch(x){
+
+            case 1:
+                partie.setPost(postes.get(0));
+                break;
+            case 2:
+                partie.setPost(postes.get(1));
+                break;
+            case 3:
+                partie.setPost(postes.get(2));
+                break;
+            case 4:
+                partie.setPost(postes.get(3));
+                break;
+            case 5:
+                partie.setPost(postes.get(4));
+                break;
+            case 6:
+                partie.setPost(postes.get(5));
+                break;
+            case 7:
+                partie.setPost(postes.get(6));
+                break;
+            case 8:
+                partie.setPost(postes.get(7));
+                break;
+            case 9:
+                partie.setPost(postes.get(8));
+                break;
+            default:
+        System.out.println("Incorrect choice");
+                break;
+        }
+
+//        System.out.println(partie.getPost());
+        System.out.println("Please choose a game");
+        for(int i=0 ; i< partie.getPost().getGames().size() ; i++){
+            System.out.println(partie.getPost().getGames().get(i));
+        }
+        int y = scanner.nextInt();
+        switch(y){
+
+            case 1:
+                partie.setGame(partie.getPost().getGames().get(y-1));
+                break;
+            case 2:
+                partie.setGame(partie.getPost().getGames().get(y-1));
+                break;
+            case 3:
+                partie.setGame(partie.getPost().getGames().get(y-1));
+                break;
+            case 4:
+                partie.setGame(partie.getPost().getGames().get(y-1));
+                break;
+            default:
+                System.out.println("Incorrect choice");
+                break;
+        }
+
+        System.out.println("set start time");
+        String debut = scanner.next();
+        partie.setDebutTime(LocalTime.parse(debut));
+        System.out.println("set period time");
+
+        String periode = scanner.next();
+        partie.setPeriode(LocalTime.parse(periode));
+        partie.setEndTime(getEndTime(partie.getDebutTime(),partie.getPeriode().toString()));
+
+//        System.out.println(partie.getGame());
+        System.out.println(partie);
+        partie.setEndTime(getEndTime(partie.getDebutTime(),partie.getPeriode().toString()));
+
+            //        check if available
+
+
+
+
+
+
 
 
     }
 
+    public static LocalTime getEndTime(LocalTime debutTime, String periode){
+        String[] time = periode.split(":");
+        debutTime = debutTime.plusHours(Integer.parseInt(time[0]));
+        debutTime = debutTime.plusMinutes(Integer.parseInt(time[1]));
+        return debutTime;
+    }
     public static Partie createPartie(){
-        Partie partie= new Partie() ;
+        Partie partie = new Partie();
+//        Partie partie1 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("10:30:00"),LocalTime.parse("30:00"));
+//        partie.setPlayer(player1);
+//        partie.setPost(postes.get(0));
+        partie.setDebutTime(LocalTime.parse("10:30:00"));
+        partie.setPeriode(LocalTime.parse("00:30"));
+        partie.setEndTime(getEndTime(partie.getDebutTime(),partie.getPeriode().toString()));
+        LocalTime endTime= getEndTime(LocalTime.parse("10:30:00"),"00:30" );
+        System.out.println(partie.toString());
 
         return partie ;
     }
 
-    public static void getAlphaNumericString(int n)
+    public  void reservation(Partie partie){
+
+
+
+        this.schedule.add(partie);
+    }
+
+    public static void generateRandomCode(int n)
     {
-        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+        String Code = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
         StringBuilder sb = new StringBuilder(n);
 
         for (int i = 0; i < n; i++) {
-            int index = (int)(AlphaNumericString.length() * Math.random());
-            sb.append(AlphaNumericString.charAt(index));
+            int index = (int)(Code.length() * Math.random());
+            sb.append(Code.charAt(index));
         }
         System.out.println(sb.toString());
-
     }
 
     public static void afficherEcrant(ArrayList<Ecrant> ecr){

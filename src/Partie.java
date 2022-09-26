@@ -1,27 +1,23 @@
 import java.time.LocalTime;
 
 public class Partie {
-    private int id;
+
     private Player player;
     private Post post;
+    private Game game;
     private LocalTime debutTime;
-    private String periode;
+    private LocalTime endTime;
+    private LocalTime periode;
 
-    public Partie(int id, Player player, Post post, LocalTime debutTime, String periode) {
-        this.id = id;
+    public Partie(Player player, Post post, Game game, LocalTime debutTime, LocalTime periode) {
         this.player = player;
         this.post = post;
+        this.game = game;
         this.debutTime = debutTime;
         this.periode = periode;
     }
-    public Partie(){}
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Partie() {
     }
 
     public Player getPlayer() {
@@ -40,6 +36,14 @@ public class Partie {
         this.post = post;
     }
 
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     public LocalTime getDebutTime() {
         return debutTime;
     }
@@ -48,11 +52,31 @@ public class Partie {
         this.debutTime = debutTime;
     }
 
-    public String getPeriode() {
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public LocalTime getPeriode() {
         return periode;
     }
 
-    public void setPeriode(String periode) {
+    public void setPeriode(LocalTime periode) {
         this.periode = periode;
+    }
+
+    @Override
+    public String toString() {
+        return "Partie{\n\t" +
+                "player=" + player +
+                ",\n\t post=" + post +
+                ",\n\t chosen game=" + game +
+                ",\n\t debutTime=" + debutTime +
+                ",\n\t endTime=" + endTime +
+                ",\n\t periode=" + periode +
+                '}';
     }
 }
