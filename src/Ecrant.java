@@ -32,4 +32,13 @@ public class Ecrant {
     public int getQuantity() {
         return quantity;
     }
+
+    @Override
+    public String toString() {
+        return "Ecrant{" +
+                "id=" + id +
+                ", make='" + make + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

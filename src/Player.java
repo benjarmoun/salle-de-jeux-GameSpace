@@ -63,4 +63,16 @@ public class Player {
     public void setPeriode(String periode) {
         this.periode = periode;
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "prenom='" + prenom + '\'' +
+                ", nom='" + nom + '\'' +
+                ", player_code='" + player_code + '\'' +
+                ", post_id=" + post_id +
+                ", debutTime=" + debutTime +
+                ", periode='" + periode + '\'' +
+                '}';
+    }
 }

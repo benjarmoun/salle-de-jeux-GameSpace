@@ -44,4 +44,14 @@ public class Post {
     public void setGames(ArrayList<Game> games) {
         this.games = games;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ",\n\t\t console=" + console +
+                ",\n\t\t ecrant=" + ecrant +
+                ",\n\t\t games available=" + games +
+                '}';
+    }
 }
