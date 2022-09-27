@@ -6,7 +6,7 @@ import java.util.spi.LocaleNameProvider;
 public class Main {
 
     Player[] queue;
-    ArrayList<Partie> schedule ;
+    static ArrayList<Partie> schedule = new ArrayList<>();
     public static void main(String[] args) {
 
         Player player1 = new Player("ibrahim","benjarmoun","generated_code",1,LocalTime.parse("10:30:00"),"2h");
@@ -94,20 +94,115 @@ public class Main {
                 break;
         }
 
-        System.out.println("set start time");
-        String debut = scanner.next();
-        partie.setDebutTime(LocalTime.parse(debut));
-        System.out.println("set period time");
+        System.out.println("Set how much time you want to play");
 
-        String periode = scanner.next();
-        partie.setPeriode(LocalTime.parse(periode));
+        System.out.println("1- 30 min 5DH");
+        System.out.println("2- 1 heure 10DH");
+        System.out.println("3- 2 heure 18DH");
+        System.out.println("4- 5 heure 40 DH");
+        System.out.println("5- toute la journée 65 DH");
+
+        int t = scanner.nextInt();
+        switch(t){
+
+            case 1:
+                partie.setPeriode(LocalTime.parse("00:30"));
+                break;
+            case 2:
+                partie.setPeriode(LocalTime.parse("01:00"));
+                break;
+            case 3:
+                partie.setPeriode(LocalTime.parse("02:00"));
+                break;
+            case 4:
+                partie.setPeriode(LocalTime.parse("05:00"));
+                break;
+            case 5:
+                partie.setDebutTime(LocalTime.parse("09:00"));
+                partie.setPeriode(LocalTime.parse("11:00"));
+                break;
+            default:
+                System.out.println("Incorrect choice");
+                break;
+        }
+
+        if(t != 5){
+            System.out.println("set start time");
+            String debut = scanner.next();
+            partie.setDebutTime(LocalTime.parse(debut));
+        }
         partie.setEndTime(getEndTime(partie.getDebutTime(),partie.getPeriode().toString()));
-
 //        System.out.println(partie.getGame());
-        System.out.println(partie);
-        partie.setEndTime(getEndTime(partie.getDebutTime(),partie.getPeriode().toString()));
+//        System.out.println(partie);
+
+
+
+
+
+
+        Partie partie1 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("10:30:00"),LocalTime.parse("00:30:00"));
+        Partie partie3 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("11:30:00"),LocalTime.parse("00:30:00"));
+        Partie partie4 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("15:30:00"),LocalTime.parse("00:30:00"));
+        Partie partie2 = new Partie(player1,postes.get(1),games.get(0),LocalTime.parse("11:30:00"),LocalTime.parse("00:30:00"));
+        partie1.setEndTime(getEndTime(partie1.getDebutTime(),partie1.getPeriode().toString()));
+        partie2.setEndTime(getEndTime(partie2.getDebutTime(),partie2.getPeriode().toString()));
+        partie3.setEndTime(getEndTime(partie3.getDebutTime(),partie3.getPeriode().toString()));
+        partie4.setEndTime(getEndTime(partie4.getDebutTime(),partie4.getPeriode().toString()));
+
+        reservation(partie1);
+        reservation(partie2);
+        reservation(partie3);
+        reservation(partie4);
 
             //        check if available
+        int p=1;
+        boolean TEST = false;
+        for (int i = 0; i< schedule.size() ; i++) {
+
+            if (((partie.getDebutTime().compareTo(LocalTime.parse("09:00")) >= 0 && partie.getEndTime().compareTo(LocalTime.parse("12:00")) <= 0)
+                || (partie.getDebutTime().compareTo(LocalTime.parse("14:00")) >= 0 && partie.getEndTime().compareTo(LocalTime.parse("20:00")) <= 0))) {
+                if (partie.getPost() == schedule.get(i).getPost()) {
+                    if (
+                            !((schedule.get(i).getDebutTime().compareTo(partie.getDebutTime()) > 0 //compared debut in schedule whit wanted start time
+                                    && schedule.get(i).getDebutTime().compareTo(partie.getEndTime()) >= 0) //compared debut in schedule whit wanted END time
+                                    || (schedule.get(i).getEndTime().compareTo(partie.getDebutTime()) <= 0))
+                    ) {
+
+//                        System.out.println("schedule");
+//                        System.out.println(schedule.get(i).getPost());
+//                        System.out.println(schedule.get(i).getDebutTime());
+//                        System.out.println(schedule.get(i).getEndTime());
+//                        System.out.println("partie");
+//                        System.out.println(partie.getPost());
+//                        System.out.println(partie.getDebutTime());
+//                        System.out.println(partie.getEndTime());
+
+                        System.out.println("post occupied at this period");
+                        TEST = false;
+                        break;
+                    } else {
+                        TEST = true;
+//                        System.out.println("reservation done");
+                        // reservation(partie3);
+
+                    }
+                } else {
+                    p++;
+                    if(p == schedule.size()){
+                        System.out.println("reservation done 2");
+                         reservation(partie);
+
+                    }
+                }
+            } else {
+                System.out.println("Period not available");
+            }
+        }
+        if(TEST){
+            System.out.println("reservation done test");
+             reservation(partie);
+
+        }
 
 
 
@@ -115,6 +210,8 @@ public class Main {
 
 
 
+    }
+    public static void isAvailable(){
 
     }
 
@@ -138,11 +235,11 @@ public class Main {
         return partie ;
     }
 
-    public  void reservation(Partie partie){
+    public static void reservation(Partie partie){
 
 
 
-        this.schedule.add(partie);
+        schedule.add(partie);
     }
 
     public static void generateRandomCode(int n)
@@ -240,8 +337,9 @@ public class Main {
         for (Post pst:postes){
             System.out.println("\n"+pst.getId()+"- console: "+pst.getConsole().getName()+" ecrant: "+pst.getEcrant().getMake());
             System.out.print("Games: ");
-            for(int i=0; i< pst.getGames().size(); i++)
-            System.out.print(pst.getGames().get(i).getId()+"- " +pst.getGames().get(i).getName()+" ");
+            for(int i=0; i< pst.getGames().size(); i++) {
+                System.out.print(pst.getGames().get(i).getId()+"- " +pst.getGames().get(i).getName()+" ");
+            }
             System.out.print("\n");
         }
     }
