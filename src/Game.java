@@ -35,10 +35,6 @@ public class Game {
 
     @Override
     public String toString() {
-        return "Game{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", category='" + category + '\'' +
-                "}\n\t\t\t";
+        return '\'' + name + '\'';
     }
 }

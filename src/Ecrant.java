@@ -35,10 +35,6 @@ public class Ecrant {
 
     @Override
     public String toString() {
-        return "Ecrant{" +
-                "id=" + id +
-                ", make='" + make + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "='" + make + '\'';
     }
 }

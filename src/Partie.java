@@ -8,6 +8,16 @@ public class Partie {
     private LocalTime debutTime;
     private LocalTime endTime;
     private LocalTime periode;
+    private int Price;
+
+//    public Partie(Player player, Post post, Game game, LocalTime debutTime, LocalTime periode, int p) {
+//        this.player = player;
+//        this.post = post;
+//        this.game = game;
+//        this.debutTime = debutTime;
+//        this.periode = periode;
+//        this.Price = p;
+//    }
 
     public Partie(Player player, Post post, Game game, LocalTime debutTime, LocalTime periode) {
         this.player = player;
@@ -16,6 +26,9 @@ public class Partie {
         this.debutTime = debutTime;
         this.periode = periode;
     }
+
+
+//
 
     public Partie() {
     }
@@ -68,9 +81,17 @@ public class Partie {
         this.periode = periode;
     }
 
+    public int getPrice() {
+        return Price;
+    }
+
+    public void setPrice(int price) {
+        Price = price;
+    }
+
     @Override
     public String toString() {
-        return "Partie{\n\t" +
+        return "\n\nPartie{\n\t" +
                 "player=" + player +
                 ",\n\t post=" + post +
                 ",\n\t chosen game=" + game +

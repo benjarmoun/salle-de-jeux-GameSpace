@@ -35,10 +35,6 @@ public class Console {
 
     @Override
     public String toString() {
-        return "Console{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "='" + name + '\'';
     }
 }
