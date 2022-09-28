@@ -19,12 +19,13 @@ public class Partie {
 //        this.Price = p;
 //    }
 
-    public Partie(Player player, Post post, Game game, LocalTime debutTime, LocalTime periode) {
+    public Partie(Player player, Post post, Game game, LocalTime debutTime, LocalTime periode, int price) {
         this.player = player;
         this.post = post;
         this.game = game;
         this.debutTime = debutTime;
         this.periode = periode;
+        this.Price = price;
     }
 
 

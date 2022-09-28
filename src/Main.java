@@ -16,30 +16,6 @@ public class Main {
     public static void ApplicationMain(){
 
 
-//        Player player1 = new Player("ibrahim","benjarmoun",generateRandomCode(6),1,LocalTime.parse("10:30:00"),"2h");
-//
-//        ArrayList<Game> games = addGame();
-//
-//        ArrayList<Console> consoles =addConsole();
-//
-//        ArrayList<Ecrant> ecrants = addEcrant();
-//
-//        ArrayList<Post> postes= addPost(consoles,ecrants,games);
-//
-//
-//        Partie partie1 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("10:30:00"),LocalTime.parse("00:30:00"));
-//        Partie partie3 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("11:30:00"),LocalTime.parse("00:30:00"));
-//        Partie partie4 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("15:30:00"),LocalTime.parse("00:30:00"));
-//        Partie partie2 = new Partie(player1,postes.get(1),games.get(0),LocalTime.parse("11:30:00"),LocalTime.parse("00:30:00"));
-//        partie1.setEndTime(getEndTime(partie1.getDebutTime(),partie1.getPeriode().toString()));
-//        partie2.setEndTime(getEndTime(partie2.getDebutTime(),partie2.getPeriode().toString()));
-//        partie3.setEndTime(getEndTime(partie3.getDebutTime(),partie3.getPeriode().toString()));
-//        partie4.setEndTime(getEndTime(partie4.getDebutTime(),partie4.getPeriode().toString()));
-//
-//        reservation(partie1);
-//        reservation(partie2);
-//        reservation(partie3);
-//        reservation(partie4);
 
         System.out.println("choose an option");
         System.out.println("1- play a game");
@@ -165,6 +141,7 @@ public class Main {
                 break;
         }
 
+
         System.out.println("Set how much time you want to play");
 
         System.out.println("1- 30 min 5DH");
@@ -178,19 +155,25 @@ public class Main {
 
             case 1:
                 partie.setPeriode(LocalTime.parse("00:30"));
+                partie.setPrice(5);
                 break;
             case 2:
                 partie.setPeriode(LocalTime.parse("01:00"));
+                partie.setPrice(10);
                 break;
             case 3:
                 partie.setPeriode(LocalTime.parse("02:00"));
+                partie.setPrice(18);
                 break;
             case 4:
                 partie.setPeriode(LocalTime.parse("05:00"));
+                partie.setPrice(40);
                 break;
             case 5:
                 partie.setDebutTime(LocalTime.parse("09:00"));
                 partie.setPeriode(LocalTime.parse("11:00"));
+                partie.setPrice(65);
+
                 break;
             default:
                 System.out.println("Incorrect choice");
@@ -203,18 +186,17 @@ public class Main {
             partie.setDebutTime(LocalTime.parse(debut));
         }
         partie.setEndTime(getEndTime(partie.getDebutTime(),partie.getPeriode().toString()));
-//        System.out.println(partie.getGame());
-//        System.out.println(partie);
+
+        
 
 
 
 
 
-
-        Partie partie1 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("10:30:00"),LocalTime.parse("00:30:00"));
-        Partie partie3 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("11:30:00"),LocalTime.parse("00:30:00"));
-        Partie partie4 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("15:30:00"),LocalTime.parse("00:30:00"));
-        Partie partie2 = new Partie(player1,postes.get(1),games.get(0),LocalTime.parse("11:30:00"),LocalTime.parse("00:30:00"));
+        Partie partie1 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("10:30:00"),LocalTime.parse("00:30:00"),5);
+        Partie partie3 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("11:30:00"),LocalTime.parse("00:30:00"),5);
+        Partie partie4 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("15:30:00"),LocalTime.parse("00:30:00"),5);
+        Partie partie2 = new Partie(player1,postes.get(1),games.get(0),LocalTime.parse("11:30:00"),LocalTime.parse("00:30:00"),5);
         partie1.setEndTime(getEndTime(partie1.getDebutTime(),partie1.getPeriode().toString()));
         partie2.setEndTime(getEndTime(partie2.getDebutTime(),partie2.getPeriode().toString()));
         partie3.setEndTime(getEndTime(partie3.getDebutTime(),partie3.getPeriode().toString()));
