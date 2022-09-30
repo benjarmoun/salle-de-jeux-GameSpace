@@ -4,8 +4,8 @@ import java.util.*;
 import java.util.spi.LocaleNameProvider;
 
 public class Main {
-    static ArrayList<Partie> Queue = new ArrayList<>();
-    static ArrayList<Partie> schedule = new ArrayList<>();
+    static ArrayList<Partie> Queue = new ArrayList<Partie>();
+    static ArrayList<Partie> schedule = new ArrayList<Partie>();
     public static void main(String[] args) {
 
 
@@ -38,7 +38,9 @@ public class Main {
 
                 break;
             case 3:
-                profit(schedule);
+//                profit(schedule);
+                System.out.println("Today's total profit is: "+ profit(schedule) + "DH");
+
                 ApplicationMain();
                 break;
             case 4:
@@ -55,7 +57,7 @@ public class Main {
         }
     }
     public static void Application(){
-        Player player1 = new Player("ibrahim","benjarmoun","generated_code",1,LocalTime.parse("10:30:00"),"2h");
+        Player player1 = new Player("ibrahim","benjarmoun",generateRandomCode(6),1,LocalTime.parse("10:30:00"),"2h");
 
         LocalTime currentTime = LocalTime.parse("03:15");
         System.out.println(currentTime);
@@ -119,7 +121,7 @@ public class Main {
 //        System.out.println(partie.getPost());
         System.out.println("Please choose a game");
         for(int i=0 ; i< partie.getPost().getGames().size() ; i++){
-            System.out.println(partie.getPost().getGames().get(i));
+            System.out.println(i+1 +"- " + partie.getPost().getGames().get(i));
         }
         int y = scanner.nextInt();
         switch(y){
@@ -187,16 +189,29 @@ public class Main {
         }
         partie.setEndTime(getEndTime(partie.getDebutTime(),partie.getPeriode().toString()));
 
-        
+        Player plyr =new Player();
+        System.out.println("set the player's first name");
+        String fname = scanner.next();
+        System.out.println("set the player's last name");
+        plyr.setPrenom(fname);
+        String lname = scanner.next();
+        plyr.setNom(lname);
+        plyr.setPlayer_code(generateRandomCode(6));
+        plyr.setPost_id(partie.getPost().getId());
+        plyr.setDebutTime(partie.getDebutTime());
+        plyr.setPeriode(partie.getPeriode().toString());
+        partie.setPlayer(plyr);
 
 
 
 
 
-        Partie partie1 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("10:30:00"),LocalTime.parse("00:30:00"),5);
-        Partie partie3 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("11:30:00"),LocalTime.parse("00:30:00"),5);
-        Partie partie4 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("15:30:00"),LocalTime.parse("00:30:00"),5);
-        Partie partie2 = new Partie(player1,postes.get(1),games.get(0),LocalTime.parse("11:30:00"),LocalTime.parse("00:30:00"),5);
+
+
+        Partie partie1 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("10:00:00"),LocalTime.parse("00:30:00"),5);
+        Partie partie2 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("11:30:00"),LocalTime.parse("00:30:00"),5);
+        Partie partie3 = new Partie(player1,postes.get(0),games.get(0),LocalTime.parse("15:30:00"),LocalTime.parse("00:30:00"),5);
+        Partie partie4 = new Partie(player1,postes.get(1),games.get(0),LocalTime.parse("11:30:00"),LocalTime.parse("00:30:00"),5);
         partie1.setEndTime(getEndTime(partie1.getDebutTime(),partie1.getPeriode().toString()));
         partie2.setEndTime(getEndTime(partie2.getDebutTime(),partie2.getPeriode().toString()));
         partie3.setEndTime(getEndTime(partie3.getDebutTime(),partie3.getPeriode().toString()));
@@ -237,6 +252,7 @@ public class Main {
                                 partie.setDebutTime(schedule.get(i).getEndTime());
                                 partie.setEndTime(getEndTime(partie.getDebutTime(),partie.getPeriode().toString()));
                                 Queue.add(partie);
+                                System.out.println("you were added to the wait list successfully");
                                 break;
                             case 2:
                                 break;
@@ -258,17 +274,19 @@ public class Main {
                 } else {
                     p++;
                     if(p == schedule.size()){
-                        System.out.println("reservation done 2");
+                        System.out.println("reservation done successfully 1");
                         reservation(partie);
+                        break;
 
                     }
                 }
             } else {
-                System.out.println("Period not available");
+                System.out.println("Period out of working time");
+                break;
             }
         }
         if(TEST){
-            System.out.println("reservation done test");
+            System.out.println("reservation done successfully 2");
             reservation(partie);
 
         }
@@ -480,12 +498,12 @@ public class Main {
             }
         }
     }
-    public static void profit(ArrayList<Partie> schedule){
+    public static int profit(ArrayList<Partie> schedule){
         int profitTotal = 0;
         for (Partie prf:schedule){
             profitTotal += prf.getPrice();
         }
-        System.out.println("Today's total profit is: "+ profitTotal + "DH");
+        return profitTotal;
 
     }
 
@@ -510,8 +528,6 @@ public class Main {
     }
 
     public static void reservation(Partie partie){
-
-
 
         schedule.add(partie);
     }

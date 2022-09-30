@@ -16,6 +16,9 @@ public class Player {
         this.periode = periode;
     }
 
+    public Player() {
+    }
+
     public String getPrenom() {
         return prenom;
     }

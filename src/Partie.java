@@ -10,14 +10,7 @@ public class Partie {
     private LocalTime periode;
     private int Price;
 
-//    public Partie(Player player, Post post, Game game, LocalTime debutTime, LocalTime periode, int p) {
-//        this.player = player;
-//        this.post = post;
-//        this.game = game;
-//        this.debutTime = debutTime;
-//        this.periode = periode;
-//        this.Price = p;
-//    }
+
 
     public Partie(Player player, Post post, Game game, LocalTime debutTime, LocalTime periode, int price) {
         this.player = player;
